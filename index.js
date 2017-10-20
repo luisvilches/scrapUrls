@@ -66,30 +66,42 @@ function createFile(name){
     });
 }
 
+function compararUrls(line){
+    fs.readFile("./urls.txt",'utf-8',(err,result) => {
+        if(err){
+            console.log(err);
+        } else {
+            var data = result.split("\n");
+            if(data.indexOf(line) >= 0){
+                console.log("linea duplicada");
+            } else {
+                write("./urls.txt", line);
+                console.log( line);
+            }
+        }
+    })
+}
+
 function verificar(a,url){
     var arr = a.split("\n")
     arr.map((item,index) => {
+
+        var line =  url + " => " + item;
+
         if(/KMS/.test(item)){
-            write("./urls.txt",item + "=> " + url + "\n");
-            console.log(item + "=> " + url + "\n");
+            compararUrls(line)
         } else if(/KMS/.test(item)){
-            write("./urls.txt",item + "=> " + url + "\n");
-            console.log(item + "=> " + url + "\n");
+            compararUrls(line)
         } else if(/kms/.test(item)){
-            write("./urls.txt",item + "=> " + url + "\n");
-            console.log(item + "=> " + url + "\n");
+            compararUrls(line)
         } else if(/Kms/.test(item)){
-            write("./urls.txt",item + "=> " + url + "\n");
-            console.log(item + "=> " + url + "\n");
-        } else if(/Kilómetros/.test(item)){
-            write("./urls.txt",item + "=> " + url + "\n");
-            console.log(item + "=> " + url + "\n");
-        } else if(/KILÓMETROS/.test(item)){
-            write("./urls.txt",item + "=> " + url + "\n");
-            console.log(item + "=> " + url + "\n");
-        } else if(/kilómetros/.test(item)){
-            write("./urls.txt",item + "=> " + url + "\n");
-            console.log(item + "=> " + url + "\n");
+            compararUrls(line)
+        } else if(/Kilómetro/.test(item)){
+            compararUrls(line)
+        } else if(/KILÓMETRO/.test(item)){
+            compararUrls(line)
+        } else if(/kilómetro/.test(item)){
+            compararUrls(line)
         } else {
             console.log("sin coincidencia" + "=> " + url + "\n");
         }
